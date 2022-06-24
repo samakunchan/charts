@@ -45,9 +45,8 @@ class LayoutState extends StatelessWidget {
               ),
             ),
             Expanded(
-                child: Center(
-              child: content,
-            ))
+              child: content
+            )
           ],
         ),
       ),

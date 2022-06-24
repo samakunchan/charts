@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-class KeywordsModel {
-  const KeywordsModel({
+class AppKeywordsModel {
+  const AppKeywordsModel({
     required this.message,
     required this.code,
     required this.startTime,
@@ -17,8 +17,8 @@ class KeywordsModel {
   final int endTime;
   final Result result;
 
-  factory KeywordsModel.fromJson(Map<String, dynamic> json) {
-    return KeywordsModel(
+  factory AppKeywordsModel.fromJson(Map<String, dynamic> json) {
+    return AppKeywordsModel(
         message: json['message'],
         code: json['code'],
         startTime: json['startTime'],
@@ -37,24 +37,28 @@ class KeywordsModel {
     };
   }
 
-  static Future<KeywordsModel> loadJson() async {
+  static Future<AppKeywordsModel> loadJson() async {
     final contents = await rootBundle.loadString(
       'examples/keywords.json',
     );
-    return KeywordsModel.fromJson(jsonDecode(contents) as Map<String, dynamic>);
+    // print((jsonDecode(contents) as Map<String, dynamic>).keys);
+    // print((jsonDecode(contents) as Map<String, dynamic>).values);
+    return AppKeywordsModel.fromJson(jsonDecode(contents) as Map<String, dynamic>);
   }
 }
 
 class Result {
   Result({required this.keywords});
-  List<Keyword> keywords;
+  List<KeywordModel> keywords;
 
   factory Result.fromJson(Map<String, dynamic> json) {
     return Result(
         keywords: (json['keywords'] as List)
-            .map((keyword) => Keyword.fromJson(keyword))
-            .toList());
+            .map((keyword) => KeywordModel.fromJson(keyword))
+            .toList()
+    );
   }
+
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'keywords': keywords,
@@ -62,8 +66,8 @@ class Result {
   }
 }
 
-class Keyword {
-  const Keyword({
+class KeywordModel {
+  const KeywordModel({
     required this.value,
     required this.refValue,
     required this.contexts,
@@ -77,8 +81,8 @@ class Keyword {
   final int score;
   final String pos;
 
-  factory Keyword.fromJson(Map<String, dynamic> json) {
-    return Keyword(
+  factory KeywordModel.fromJson(Map<String, dynamic> json) {
+    return KeywordModel(
       value: json['value'],
       refValue: json['refValue'],
       contexts: json['contexts'],
