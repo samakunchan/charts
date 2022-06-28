@@ -25,14 +25,18 @@ class LayoutState extends StatelessWidget {
                       onPressed: () =>
                           Navigator.pushNamed(context, Routes.home),
                       child: const Text('Home')),
-                  ElevatedButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, Routes.graph),
-                      child: const Text('Graphique')),
+                  // ElevatedButton(
+                  //     onPressed: () =>
+                  //         Navigator.pushNamed(context, Routes.graph),
+                  //     child: const Text('Graphique')),
                   ElevatedButton(
                       onPressed: () =>
                           Navigator.pushNamed(context, Routes.keywords),
                       child: const Text('Mot clés')),
+                  ElevatedButton(
+                      onPressed: () =>
+                          Navigator.pushNamed(context, Routes.keywords2),
+                      child: const Text('Mot clés 2')),
                   ElevatedButton(
                       onPressed: () =>
                           Navigator.pushNamed(context, Routes.highlighter),

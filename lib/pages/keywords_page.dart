@@ -1,11 +1,8 @@
-import 'dart:collection';
-import 'dart:convert';
 
 import 'package:charts/layout/layout.dart';
-import 'package:charts/services/models/cloud_words/keywords_model.dart';
+import 'package:charts/services/models/keywords/keywords_model.dart';
 
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
 
 class KeywordPage extends StatefulWidget {
@@ -22,7 +19,6 @@ class _KeywordPageState extends State<KeywordPage> {
   @override
   void initState() {
     super.initState();
-    print(select);
     myFuture = AppKeywordsModel.loadJson();
   }
 
@@ -56,7 +52,6 @@ class _KeywordPageState extends State<KeywordPage> {
 
   Widget buildKeywords(BuildContext context, List<KeywordModel>? arr, int? total) {
     var list = arr!.asMap().entries;
-    print(list.take(20).where((element) => element.value.value == 'France').first.value.value);
     return LayoutState(
       content: SingleChildScrollView(
         child: Column(
@@ -178,6 +173,7 @@ class _KeywordPageState extends State<KeywordPage> {
                           measureFn: (PartModel measure, _) => measure.percent,
                           data: list
                               .where((e) => e.value.pos == 'NOUN')
+                              .take(20)
                               .map((e) => PartModel(index: e.key, percent: (e.value.score / geTotal(list, 'NOUN')!) * 100, text: e.value.value))
                               .toList(),
                           labelAccessorFn: (PartModel row, _) => row.text,
@@ -209,6 +205,7 @@ class _KeywordPageState extends State<KeywordPage> {
                           measureFn: (PartModel measure, _) => measure.percent,
                           data: list
                               .where((e) => e.value.pos == 'PROPN')
+                              .take(20)
                               .map((e) => PartModel(index: e.key, percent: (e.value.score / geTotal(list, 'PROPN')!) * 100, text: e.value.value))
                               .toList(),
                           labelAccessorFn: (PartModel row, _) => row.text,

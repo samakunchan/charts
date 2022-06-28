@@ -3,12 +3,14 @@ import 'package:charts/pages/graph_page.dart';
 import 'package:charts/pages/highlighter_page.dart';
 import 'package:charts/pages/home_page.dart';
 import 'package:charts/pages/keywords_page.dart';
+import 'package:charts/pages/keywords_page2.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
   static const String home = '/';
   static const String graph = '/graph';
   static const String keywords = '/keywords';
+  static const String keywords2 = '/keywords2';
   static const String highlighter = '/highlighter';
   static const String cloudWord = '/cloud-words';
 
@@ -58,6 +60,16 @@ class Routes {
           //       ).animate(animation),
           //   child: child,
           // ),
+        );
+      case keywords2:
+        return PageRouteBuilder<KeywordPage2>(
+            settings: settings,
+            pageBuilder: (_, __, ___) => const KeywordPage2(),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) =>
+                FadeTransition(opacity: animation, child: child),
         );
       case highlighter:
         return PageRouteBuilder<HighlighterPage>(
